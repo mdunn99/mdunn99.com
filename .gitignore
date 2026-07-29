@@ -1,0 +1,6 @@
+# Hugo build output (built by GitHub Actions)
+/public/
+
+# Hugo build lock / cache
+.hugo_build.lock
+/resources/_gen/
