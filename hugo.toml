@@ -12,7 +12,7 @@ pagination.pagerSize     = 10
 
   enableThemeToggle = true
   # Subtitle for home
-  # homeSubtitle = "See my [posts](/posts)"
+  homeSubtitle = "Read my [posts](/posts)"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false

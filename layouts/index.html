@@ -1,0 +1,84 @@
+{{ define "body" }}
+    <body class="{{ if .Site.Params.backgroundImage }} background-image" style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
+{{ end }}
+
+{{ define "main" }}
+    {{/* Floating gallery: drop any image/gif into assets/floating/ and it appears here. */}}
+    {{ $imgs := resources.Match "floating/*" }}
+    {{ with $imgs }}
+    <div class="floating-gallery" aria-hidden="true">
+        {{ range $i, $img := . }}
+            {{/* Deterministic scatter so positions are stable across builds. */}}
+            {{ $top   := add 8  (mul (mod (add (mul $i 37) 11) 78) 1) }}
+            {{ $left  := add 4  (mul (mod (add (mul $i 53) 23) 88) 1) }}
+            {{ $dur   := add 9  (mod (mul $i 7) 8) }}
+            {{ $delay := mod (mul $i 3) 6 }}
+            {{ $rot   := sub (mod (mul $i 47) 16) 8 }}
+            {{ $size  := add 90 (mod (mul $i 29) 70) }}
+            <img
+                src="{{ $img.RelPermalink }}"
+                class="floating-item"
+                loading="lazy"
+                alt=""
+                style="top:{{ $top }}%; left:{{ $left }}%; width:{{ $size }}px;
+                       --rot:{{ $rot }}deg;
+                       animation-duration:{{ $dur }}s;
+                       animation-delay:-{{ $delay }}s;" />
+        {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="content-center">
+        <main>
+            <div>
+                {{ if .Site.Params.Portrait.Path }}
+                <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}" style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
+                {{ end }}
+
+                <h1>{{ .Site.Title }}</h1>
+
+                {{ partial "subtitle.html" . }}
+
+                {{- with .Site.Params.social }}
+                    <div>
+                        {{ partial "social-icons.html" . }}
+                    </div>
+                {{- end }}
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .floating-gallery {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .content-center { position: relative; z-index: 1; }
+
+        .floating-item {
+            position: absolute;
+            border-radius: 10px;
+            opacity: 0.18;
+            filter: saturate(0.9);
+            transform: rotate(var(--rot, 0deg));
+            animation-name: floatDrift;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            transition: opacity 0.4s ease;
+        }
+        .floating-item:hover { opacity: 0.5; }
+
+        @keyframes floatDrift {
+            from { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            to   { transform: translateY(-22px) rotate(calc(var(--rot, 0deg) * -1)); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-item { animation: none; }
+        }
+    </style>
+{{ end }}
