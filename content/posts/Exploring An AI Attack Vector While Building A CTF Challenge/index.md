@@ -52,10 +52,6 @@ I also had to try a few variations of the original string as well as tweaking th
 Information that a player would need to make the inverted minimum password requirements useful (a SHA256 hash and a "magic string") is stored in plaintext on the database, rewarding them for their enumeration and leading them to the right path. Metadata included in the database also includes the model that was used to embed the vectors which would've been necessary for performing the attack.
 
 As mentioned earlier, a player would have to use the minimum password requirements to construct a custom ruleset including a reasonably-sized arbitrary string of text placed in an arbitrary position in the context of the real password (a "magic string"). This also doesn't include two specific characters that are prepended to the password. Using this custom ruleset and the SHA256 hash to compare attempts to, a player would use a password-cracking utility like hashcat's ["Mask Attack"](https://hashcat.net/wiki/doku.php?id=mask_attack).
-```bash
-hashcat -a 3 -m 1400 <SHA256HASH> XX?d?d<MAGICSTRING>?d?d
-```
-*This example uses hashcat's Mask Attack mode with hash type 1400 (SHA256) to generate some very specific properties of password candidates that can only be obtained by inverting the embedded string exfiltrated from the ChromaDB database.*
 
 The purpose of the "magic string" is to simultaneously introduce complexity to the password as to not be guessed by pure brute force while also shifting some of the burden of this complexity from the information to be extracted during the inversion process onto the metadata discovery process.
 
