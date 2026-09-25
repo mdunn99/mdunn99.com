@@ -7,7 +7,7 @@ tags: []
 categories: [ai, ctf, pentest, docker]
 protected: true
 ---
-In a few weeks from now, a certain unnamed CTF ([Capture The Flag](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))) event will take place that I'll have the pleasure of supporting infrastructure for and also developing a challenge for (more information about this event after it's over!). In this post, I'll be talking about what that challenge is at a high-level, some of the more technical aspects, my inspiration for it, and the challenges I encountered while developing it.
+I created my first CTF ([Capture The Flag](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))) challenge for a certain CTF (more details shortly). In this post, I'll be talking about what that challenge is at a high-level, some of the more technical aspects, my inspiration for it, and the challenges I encountered while developing it.
 
 ---
 # Inspiration
