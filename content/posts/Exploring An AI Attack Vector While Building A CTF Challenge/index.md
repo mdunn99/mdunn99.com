@@ -3,11 +3,9 @@ layout: post
 title: Exploring Inversion Attacks While Building A CTF Challenge
 author: Michael Dunn
 date: 2026-09-03
-tags: []
 categories: [ai, ctf, pentest, docker]
-protected: true
 ---
-I created my first CTF ([Capture The Flag](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))) challenge for a certain CTF (more details shortly). In this post, I'll be talking about what that challenge is at a high-level, some of the more technical aspects, my inspiration for it, and the challenges I encountered while developing it.
+I created my first CTF ([Capture The Flag](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))) challenge for a certain CTF event (kept discrete since it will be used in next year's iteration). In this post, I'll be talking about what that challenge is at a high-level, some of the more technical aspects, my inspiration for it, and the challenges I encountered while developing it.
 
 ---
 # Inspiration
