@@ -4,3 +4,6 @@
 # Hugo build lock / cache
 .hugo_build.lock
 /resources/_gen/
+
+# PostCSS dependencies
+node_modules/

@@ -1,76 +1,80 @@
-baseurl      = "https://mdunn99.com"
+baseURL      = "https://mdunn99.com/"
 title        = "Mike's Logs"
 languageCode = "en-us"
-theme        = "hello-friend-ng"
-pagination.pagerSize     = 10
+theme        = "hugo-texify3"
+enableRobotsTXT = true
+rssLimit     = 10
 
-[params]
-  dateform        = "Jan 2, 2006"
-  dateformShort   = "Jan 2"
-  dateformNum     = "2006-01-02"
-  dateformNumTime = "2006-01-02 15:04"
-
-  enableThemeToggle = true
-  # Subtitle for home
-  homeSubtitle = "Read my [posts](/posts)"
-
-  # Set disableReadOtherPosts to true in order to hide the links to other posts.
-  disableReadOtherPosts = false
-
-  # Enable sharing buttons, if you like
-  enableSharingButtons = false
-  
-  # Show a global language switcher in the navigation bar
-  enableGlobalLanguageMenu = false
-
-  # Metadata mostly used in document's head
-  description = "My new homepage or blog"
-  keywords = "homepage, blog"
-  images = [""]
+[pagination]
+  pagerSize = 10
 
 [taxonomies]
-    category = "blog"
-    tag      = "tags"
-    series   = "series"
+  tag      = "tags"
+  category = "categories"
 
-[languages]
-  [languages.en]
-    title = "Mike's Logs"
-    keywords = ""
-    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-    readOtherPosts = "Read other posts"
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  # Posts use top-level "#" headings, so include h1 in the table of contents
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel   = 4
+    ordered    = false
 
-  [languages.en.params]
-    subtitle  = "A simple theme for Hugo"
+[params]
+  title       = "Mike's Logs"
+  author      = "Michael Dunn"
+  description = "Cybersecurity writeups, projects, and general thoughts by Michael Dunn"
+  keywords    = ["cybersecurity", "pentest", "hackthebox", "writeup", "blog"]
+  footnote    = """
+<a class=link href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank rel=noopener>CC BY-NC 4.0</a> |
+Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_blank rel=noopener>TeXify3</a>
+"""
+  since       = "2025"
+  dateFormat  = "Jan 2, 2006"
+  customCSS   = []
+  customJS    = []
+  emphasisWithDots = true
+  toc              = true
+  showWordCount    = true
+  showReadingTime  = true
+  rootFontSize     = "100%"
+  math             = false
+  numberedSubtitles = false
+  enableDuckDuckGoSearchBox = true
 
-    [languages.en.params.logo]
-      logoText = "Mike's Logs"
-      logoHomeLink = "/"
-    # or
-    #
-    # path = "/img/your-example-logo.svg"
-    # alt = "Your example logo alt text"
+  # The theme ships with its author's giscus comments and Buy Me a Coffee
+  # widget enabled; blank them out so they don't appear on this site.
+  [params.commentEngine]
+    code = ""
+  [params.buymeacoffee]
+    code = ""
+
+  [params.sharingbuttons]
+    facebook   = false
+    twitter    = false
+    email      = false
+    linkedin   = false
+    reddit     = false
+    whatsapp   = false
+    hackernews = false
+    telegram   = false
 
 [menu]
   [[menu.main]]
-    identifier = "blog"
+    identifier = "posts"
     name       = "Blog"
-    url        = "/posts"
+    url        = "/posts/"
+    weight     = 1
 
   [[menu.main]]
     identifier = "about"
     name       = "About"
-    url        = "/about"
+    url        = "/about/"
+    weight     = 2
 
-  # and submenus
-  #[[menu.main]]
-  #  identifier  = "parent"
-  #  name        = "Parent"
-  #  url         = "/parent"
-  #  hasChildren = true
-
-  #[[menu.main]]
-  #  identifier  = "child"
-  #  name        = "Child"
-  #  url         = "/parent/child"
-  #  parent      = "parent"
+  [[menu.main]]
+    identifier = "github"
+    name       = "GitHub"
+    url        = "https://github.com/mdunn99"
+    weight     = 3
