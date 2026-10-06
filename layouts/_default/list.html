@@ -1,0 +1,36 @@
+{{ define "head" }}
+{{ $options := dict "transpiler" "dartsass" "targetPath" "css/list.css" }}
+{{ with resources.Get "sass/layouts/list.scss" | toCSS $options | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
+<link rel="stylesheet" href="{{ "css/search.css" | relURL }}">
+{{ end }}
+
+{{ define "main" }}
+<main id="main" class="archive">
+  {{ if .Site.Params.enableSiteSearch }}
+    {{ partial "site-search.html" . }}
+  {{ end }}
+  <div id="post-archive">
+  {{ $pages := where .Data.Pages "Type" "posts" }}
+  {{ range $pages.GroupByDate "2006-01" }}
+  <div class="post-group">
+    <h3>{{ dateFormat "January 2006" (printf "%s-01" .Key) }}</h3>
+    <ul>
+      {{ range .Pages }}
+      <li>
+        <a class="post-link" href="{{ .RelPermalink }}">
+          <span>{{ .Title }}</span>
+          <time>{{ .PublishDate.Format .Site.Params.dateFormat }}</time>
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+  <div class="post-group">
+    <h3>...</h3>
+  </div>
+  </div>
+</main>
+{{ end }}

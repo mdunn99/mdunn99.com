@@ -1,5 +1,5 @@
 baseURL      = "https://mdunn99.com/"
-title        = "Mike's Logs"
+title        = "Michael Dunn"
 languageCode = "en-us"
 theme        = "hugo-texify3"
 enableRobotsTXT = true
@@ -13,6 +13,10 @@ rssLimit     = 10
   category = "categories"
 
 [markup]
+  # Let the theme's light/dark syntax palettes control code colors.
+  [markup.highlight]
+    noClasses = false
+
   [markup.goldmark.renderer]
     unsafe = true
   # Posts use top-level "#" headings, so include h1 in the table of contents
@@ -22,7 +26,7 @@ rssLimit     = 10
     ordered    = false
 
 [params]
-  title       = "Mike's Logs"
+  title       = "Michael Dunn"
   author      = "Michael Dunn"
   description = "Cybersecurity writeups, projects, and general thoughts by Michael Dunn"
   keywords    = ["cybersecurity", "pentest", "hackthebox", "writeup", "blog"]
@@ -32,7 +36,7 @@ Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_b
 """
   since       = "2025"
   dateFormat  = "Jan 2, 2006"
-  customCSS   = []
+  customCSS   = ["css/images.css"]
   customJS    = []
   emphasisWithDots = true
   toc              = true
@@ -41,7 +45,8 @@ Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_b
   rootFontSize     = "100%"
   math             = false
   numberedSubtitles = false
-  enableDuckDuckGoSearchBox = true
+  enableSiteSearch = true
+  enableDuckDuckGoSearchBox = false
 
   # The theme ships with its author's giscus comments and Buy Me a Coffee
   # widget enabled; blank them out so they don't appear on this site.
@@ -74,7 +79,7 @@ Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_b
     weight     = 2
 
   [[menu.main]]
-    identifier = "github"
-    name       = "GitHub"
-    url        = "https://github.com/mdunn99"
+    identifier = "categories"
+    name       = "Categories"
+    url        = "/categories/"
     weight     = 3

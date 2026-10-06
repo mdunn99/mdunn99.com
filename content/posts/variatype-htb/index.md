@@ -1,10 +1,9 @@
 ---
 title: HackTheBox Writeup - "VariaType"
 date: 2026-04-15
-tags: [fphp,python,xml,path-traversal,xml-injection,hackthebox,htb-medium]
+tags: [php,python,xml,hackthebox]
 categories: [writeup]
-protected: true
-draft: true
+draft: false
 ---
 
 "VariaType" is a medium-rated Linux box on HackTheBox: https://app.hackthebox.com/machines/VariaType?sort_by=created_at&sort_type=desc

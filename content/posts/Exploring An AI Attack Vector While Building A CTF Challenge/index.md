@@ -3,7 +3,8 @@ layout: post
 title: Exploring Inversion Attacks While Building A CTF Challenge
 author: Michael Dunn
 date: 2026-09-03
-categories: [ai, ctf, pentest, docker]
+tags: [ctf, embeddings, llm attacks]
+categories: [projects]
 ---
 I created my first CTF ([Capture The Flag](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))) challenge for a certain CTF event (kept discrete since it will be used in next year's iteration). In this post, I'll be talking about what that challenge is at a high-level, some of the more technical aspects, my inspiration for it, and the challenges I encountered while developing it.
 
@@ -14,7 +15,9 @@ I recently watched [Patrick Walsh's lecture from DEF CON 33](https://www.youtube
 SentinelOne defines [Model Inversion Attacks](https://www.sentinelone.com/cybersecurity-101/cybersecurity/model-inversion-attacks/) as "reverse-engineering machine learning models to extract sensitive information about their training data, exploiting model outputs and confidence scores through iterative queries." By "model outputs," SentinalOne is specifically talking about [embedding matrices](https://www.ibm.com/think/topics/vector-embedding), which are the unintelligible numbers that some machine learning models ([like LLMs](https://www.seangoedecke.com/how-llms-work/)) use to perform calculations and produce a final output. However, the idea of embedding documents into "vectors" has been around for [a while now](https://en.wikipedia.org/wiki/Word_embedding), and besides just reverse-engineering not-very-accessible vector embeddings from frontier language models, the specific embedding inversion attack illustrated in Walsh's talk ([and seemingly more talked about as of recent](https://www.reddit.com/r/cybersecurity/comments/1s9ybbu/embedding_inversion_attacks_make_hosted_vector/)) is targeted more-so at RAG (Retrieval Augmented Generation) systems. A document gets embedded, stored in a vector DB, and retrieved by similarity search to feed context back into an LLM. If that vector DB is exposed, so are the documents it was supposed to protect.
 
 Such an attack can be visualized below. In this instance, a vulnerable database stores vector embeddings. This can be very valuable to an attacker who can perform inversion attacks.
+
 ![](inversion_attack_diagram.png)
+
 *DEF CON 33 - Exploiting Shadow Data from AI Models and Embeddings. [Source](https://www.youtube.com/watch?v=O7BI4jfEFwA)*
 
 Given that I was actively searching for an opportunity to develop a challenge for this CTF event around the time I saw the video, it felt natural that I'd introduce the ~3,000 players to what I'd just found out about. I'd also gain some hands-on experience applying this redteaming technique.
@@ -31,7 +34,9 @@ The specifics of the challenge changed throughout, but the primary idea remained
 I went ahead and picked the most convenient option for a vector database, which I found to be [ChromaDB](https://www.trychroma.com/) given it's plug-and-play Python library.
 
 When it came to choosing which information to have the player invert, I learned through experimentation - but also by drawing on my understanding of the volatility of token placement - that expecting a string to be extracted precisely was going to be impossible. This is why I opted for the inversion candidate not to be a flag, hash, or other dense string, but rather something like a set of instructions, like a list of *minimum password requirements*.
+
 ![](tokenizer_diagram.png)
+
 *An illustration of the tokenization process. [Source](https://www.linkedin.com/pulse/tokenization-how-llms-process-text-tokens-nikitha-r-gnbkf/)*
 
 Initially, I kept things as close to a realistic deployment as possible by having Chroma ingest some strings and allow the software to embed the sensitive data itself. The player would have to discover the ChromaDB instance, extract these documents/strings from the database, and then use vec2text to perform the inversion attack.  As you'll see, this wasn't a feasible option.

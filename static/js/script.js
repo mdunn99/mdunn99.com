@@ -42,6 +42,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Treat italics immediately after an image as a caption, including when
+// Markdown puts the caption in its own paragraph after a blank line.
+document.addEventListener("DOMContentLoaded", function () {
+  const meaningfulNodes = (element) => Array.from(element.childNodes).filter(
+    (node) => !(node.nodeType === 3 && !node.textContent.trim()) && node.nodeName !== "BR"
+  );
+  const imageIn = (node) => {
+    if (node?.nodeName === "IMG") return node;
+    if (node?.nodeName === "A") {
+      const children = meaningfulNodes(node);
+      if (children.length === 1 && children[0].nodeName === "IMG") return children[0];
+    }
+    return null;
+  };
+
+  document.querySelectorAll(".content p > em").forEach((caption) => {
+    const paragraph = caption.parentElement;
+    const nodes = meaningfulNodes(paragraph);
+    let image = imageIn(nodes[nodes.indexOf(caption) - 1]);
+    if (!image && nodes.length === 1) {
+      const previous = paragraph.previousElementSibling;
+      if (previous?.nodeName === "P") {
+        image = imageIn(meaningfulNodes(previous).at(-1));
+        if (image) previous.classList.add("image-with-caption");
+      }
+    }
+    if (image) {
+      image.classList.add("has-caption");
+      caption.classList.add("image-caption");
+    }
+  });
+});
+
 // Dark mode toggle
 let darkMode = localStorage.getItem("darkMode");
 const darkModeToggle = document.querySelectorAll("#dark-mode-toggle");

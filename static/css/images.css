@@ -1,0 +1,24 @@
+/* Default size for article images; shrink to fit narrow screens. */
+.content img {
+  display: block;
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+}
+
+.content img.has-caption {
+  margin-bottom: 0.4rem;
+}
+
+.content p.image-with-caption {
+  margin-bottom: 0;
+}
+
+.content p > em.image-caption {
+  display: block;
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}

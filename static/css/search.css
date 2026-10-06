@@ -1,0 +1,5 @@
+[hidden] { display: none !important; }
+#search-matches { list-style: none; padding: 0; }
+#search-matches li { margin-bottom: 1.25rem; }
+#search-matches a { color: var(--blue); }
+#search-matches p { margin: 0.25rem 0 0; color: var(--fg4); overflow-wrap: anywhere; }

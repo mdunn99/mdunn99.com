@@ -3,9 +3,8 @@ layout: post
 title: HackTheBox Writeup - "Interpreter"
 author: Michael Dunn
 date: 2026-04-06
-tags: [box,hackthebox,htb-medium,code-injection,f-string,xml,suid,hash-cracking,python]
+tags: [hackthebox,xml,suid]
 categories: [writeup]
-protected: true
 ---
 This assessment followed a black-box approach. Interpreter is a medium [HTB machine](https://app.hackthebox.com/machines/Interpreter) running a vulnerable version of Mirth Connect, an open-source healthcare integration engine. This post covers CVE exploitation for initial foothold, hash analysis and cracking for lateral movement, and Python f-string injection via a locally hosted API server for root privilege escalation.
 # Reconnaissance

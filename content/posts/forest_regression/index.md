@@ -3,8 +3,8 @@ layout: post
 title: Training a Basic Random Forest Regression Model
 author: Michael Dunn
 date: 2026-01-30
-tags: [machine-learning,kaggle,data]
-categories: [machine learning]
+tags: [machine-learning,kaggle]
+categories: [projects]
 ---
 
   
