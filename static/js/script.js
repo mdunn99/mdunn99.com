@@ -90,10 +90,10 @@ const disableDarkMode = () => {
 };
 
 // Default to dark mode unless the visitor has explicitly switched to light
-if (darkMode === "disabled") {
-  disableDarkMode();
-} else {
+if (darkMode === "enabled") {
   enableDarkMode();
+} else {
+  disableDarkMode();
 }
 
 darkModeToggle.forEach((toggle) => {
